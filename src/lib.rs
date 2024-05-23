@@ -55,12 +55,12 @@ mod test {
 
     fn test_fn(f: fn(u8) -> u8) {
         for c in 0..256 {
+            let expected = (c as u8 as char).to_ascii_lowercase() as u8;
+            let got = f(c as u8);
             assert_eq!(
-                f(c as u8),
-                (c as u8 as char).to_ascii_lowercase() as u8,
-                "{} ('{}')",
-                c,
-                c as u8 as char
+                got, expected,
+                "got wrong result for {} ('{}') expected {} ('{}') but got {} ('{}')",
+                c, c as u8 as char, expected, expected as u8 as char, got, got as u8 as char,
             );
         }
     }
