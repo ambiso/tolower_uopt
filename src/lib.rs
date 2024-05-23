@@ -6,7 +6,7 @@ fn tolower_switch(c: u8) -> u8 {
     const A: u8 = 'A' as u8;
     const Z: u8 = 'Z' as u8;
     match c {
-        A..=Z => c - ('a' as u8 - 'A' as u8),
+        A..=Z => c + ('a' as u8 - 'A' as u8),
         _ => c,
     }
 }
