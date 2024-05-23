@@ -48,3 +48,35 @@ pub fn tolower_lut_array(s: &mut [u8]) {
         *c = tolower_lut(*c);
     }
 }
+
+#[cfg(test)]
+mod test {
+    use crate::{tolower_lut, tolower_schoen, tolower_switch};
+
+    fn test_fn(f: fn(u8) -> u8) {
+        for c in 0..256 {
+            assert_eq!(
+                f(c as u8),
+                (c as u8 as char).to_ascii_lowercase() as u8,
+                "{} ('{}')",
+                c,
+                c as u8 as char
+            );
+        }
+    }
+
+    #[test]
+    fn test_schoen() {
+        test_fn(tolower_schoen);
+    }
+
+    #[test]
+    fn test_switch() {
+        test_fn(tolower_switch);
+    }
+
+    #[test]
+    fn test_lut() {
+        test_fn(tolower_lut);
+    }
+}
